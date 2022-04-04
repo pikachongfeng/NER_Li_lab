@@ -2,7 +2,7 @@ import os
 import math
 import torch
 import torch.nn as nn
-from TorchCRF import CRF
+from torchcrf import CRF
 from itertools import repeat
 from transformers import BertModel
 from src.utils.functions_utils import vote
@@ -386,7 +386,7 @@ class MRCModel(BaseModel):
 
         if self.use_type_embed:
             embed_dims = kwargs.pop('predicate_embed_dims', self.bert_config.hidden_size)
-            self.type_embedding = nn.Embedding(13, embed_dims)
+            self.type_embedding = nn.Embedding(22, embed_dims)
 
             self.conditional_layer_norm = ConditionalLayerNorm(out_dims, embed_dims,
                                                                eps=self.bert_config.layer_norm_eps)

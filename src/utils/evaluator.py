@@ -154,7 +154,7 @@ def crf_evaluation(model, dev_info, device, ent2id):
 
     id2ent = {ent2id[key]: key for key in ent2id.keys()}
 
-    role_metric = np.zeros([13, 3])
+    role_metric = np.zeros([22, 3])
 
     mirco_metrics = np.zeros(3)
 
@@ -162,7 +162,7 @@ def crf_evaluation(model, dev_info, device, ent2id):
 
         text, gt_entities = tmp_callback
 
-        tmp_metric = np.zeros([13, 3])
+        tmp_metric = np.zeros([22, 3])
 
         pred_entities = crf_decode(tmp_tokens, text, id2ent)
 
@@ -205,7 +205,7 @@ def span_evaluation(model, dev_info, device, ent2id):
 
     assert len(start_logits) == len(end_logits) == len(dev_callback_info)
 
-    role_metric = np.zeros([13, 3])
+    role_metric = np.zeros([22, 3])
 
     mirco_metrics = np.zeros(3)
 
@@ -257,7 +257,7 @@ def mrc_evaluation(model, dev_info, device):
 
     assert len(start_logits) == len(end_logits) == len(dev_callback_info)
 
-    role_metric = np.zeros([13, 3])
+    role_metric = np.zeros([22, 3])
 
     mirco_metrics = np.zeros(3)
 
