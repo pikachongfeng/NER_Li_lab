@@ -1,6 +1,5 @@
 {
   "身份证号码": "ID_card",
-  "其他组织": "other_org",
   "单位组织": "unit_org",
   "政府部门": "govern_org",
   "其他位置": "other_loc",
@@ -8,7 +7,6 @@
   "团体": "group",
   "不确切时间": "incorrect_time",
   "钥匙": "keys",
-  "其他事物": "other_things",
   "商业机构": "eco_org",
   "房产证": "house_property",
   "个体": "individual",
@@ -18,7 +16,6 @@
   "电话号码": "phone_num",
   "确切时间": "correct_time",
   "具体住址": "specific_loc",
-  "其他人": "other_individuals",
   "项目产品": "projects",
   "合同": "contracts"
 }

@@ -12,9 +12,9 @@ import random
 
 logger = logging.getLogger(__name__)
 
-ENTITY_TYPES = ['ID_card', 'other_org', 'unit_org', 'govern_org', 'other_loc', 'bank_card',
-                'group', 'incorrect_time', 'keys', 'other_things', 'eco_org', 'house_property',
-                'individual','books','money','GPE','phone_num','correct_time','specific_loc','other_individuals','projects','contracts']
+ENTITY_TYPES = ['ID_card', 'unit_org', 'govern_org', 'other_loc', 'bank_card',
+                'group', 'incorrect_time', 'keys', 'eco_org', 'house_property',
+                'individual','books','money','GPE','phone_num','correct_time','specific_loc','projects','contracts']
 
 
 class InputExample:
@@ -126,7 +126,7 @@ class NERProcessor:
             if start_index <= _label[2] <= _label[3] <= end_index:
                 new_offset = _label[2] - start_index
 
-                assert sent[new_offset: new_offset + len(_label[-1])] == _label[-1]
+                assert sent[new_offset: new_offset + len(_label[-1])] == _label[-1],'{}'.format()
 
                 new_labels.append((_label[1], _label[-1], new_offset)) ##分别为实体类型, 文本内容，重构后的offset
             # label 被截断的情况
@@ -142,12 +142,13 @@ class NERProcessor:
     def get_examples(self, raw_examples, set_type):
         examples = []
 
-        for i, item in enumerate(raw_examples):
+        for _, item in enumerate(raw_examples):
             text = item['text']
             distant_labels = item['candidate_entities']
             pseudo = item['pseudo']
 
             sentences = cut_sent(text, self.cut_sent_len)
+
             start_index = 0
 
             for sent in sentences:

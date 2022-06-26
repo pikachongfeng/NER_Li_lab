@@ -1,6 +1,5 @@
 {
   "ID_card": "数字号码",
-  "other_org": "不确定的组织",
   "unit_org": "法院等组织",
   "govern_org": "政府直属部门",
   "other_loc": "不是具体位置的地址",
@@ -8,7 +7,6 @@
   "group": "大于1人",
   "incorrect_time": "不准确时间",
   "keys": "钥匙",
-  "other_things": "其他事物",
   "eco_org": "商业机构",
   "house_property": "房产证",
   "individual": "个体",
@@ -18,7 +16,6 @@
   "phone_num": "电话号码",
   "correct_time": "确切时间",
   "specific_loc": "具体住址",
-  "other_individuals": "其他人",
   "projects": "项目产品",
   "contracts": "合同"
 }
