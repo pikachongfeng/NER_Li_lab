@@ -2,13 +2,13 @@
 
 ## 数据挖掘
 
-![文本长度分布直方图](https://github.com/pikachongfeng/NER_Li_lab/blob/main/src/data_mining/%E6%96%87%E6%9C%AC%E9%95%BF%E5%BA%A6%E5%88%86%E5%B8%83%E7%9B%B4%E6%96%B9%E5%9B%BE.png)
+![文本长度分布直方图](https://github.com/pikachongfeng/NER_Li_lab/blob/main/data_mining/%E6%96%87%E6%9C%AC%E9%95%BF%E5%BA%A6%E5%88%86%E5%B8%83%E7%9B%B4%E6%96%B9%E5%9B%BE.png)
 
 部分文本过长，考虑过滤掉
 
 
 
-![不同标签样本数](https://github.com/pikachongfeng/NER_Li_lab/blob/main/src/data_mining/不同标签样本数.png)
+![不同标签样本数](https://github.com/pikachongfeng/NER_Li_lab/blob/main/data_mining/不同标签样本数.png)
 
 标签分布不均衡，考虑在模型层面解决此问题
 
