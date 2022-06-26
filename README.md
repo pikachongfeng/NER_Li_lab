@@ -2,7 +2,7 @@
 
 ## 数据挖掘
 
-![文本长度分布直方图](/Users/zhangyangrong/Li_lab/xfee_data/code/data_mining/文本长度分布直方图.png)
+![文本长度分布直方图][(/Users/zhangyangrong/Li_lab/xfee_data/code/data_mining/文本长度分布直方图.png)](https://github.com/pikachongfeng/NER_Li_lab/blob/main/src/data_mining/%E6%96%87%E6%9C%AC%E9%95%BF%E5%BA%A6%E5%88%86%E5%B8%83%E7%9B%B4%E6%96%B9%E5%9B%BE.png)
 
 部分文本过长，考虑过滤掉
 
