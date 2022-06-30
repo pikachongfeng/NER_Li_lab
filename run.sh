@@ -4,8 +4,8 @@ export MID_DATA_DIR="./mid_data"
 export RAW_DATA_DIR="./raw_data"
 export OUTPUT_DIR="./out"
 
-export GPU_IDS="0"
-export BERT_TYPE="roberta_wwm_large"  # roberta_wwm / roberta_wwm_large / uer_large
+export GPU_IDS=""
+export BERT_TYPE="roberta_wwm"  # roberta_wwm / roberta_wwm_large / uer_large
 export BERT_DIR="./bert/torch_$BERT_TYPE"
 
 export MODE="train"
@@ -23,7 +23,7 @@ python3 main.py \
 --train_epochs=10 \
 --swa_start=5 \
 --attack_train="" \
---train_batch_size=24 \
+--train_batch_size=8 \
 --dropout_prob=0.1 \
 --max_seq_len=512 \
 --lr=2e-5 \

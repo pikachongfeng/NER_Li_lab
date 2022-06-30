@@ -12,9 +12,7 @@ import random
 
 logger = logging.getLogger(__name__)
 
-ENTITY_TYPES = ['ID_card', 'other_org', 'unit_org', 'govern_org', 'other_loc', 'bank_card',
-                'group', 'incorrect_time', 'keys', 'other_things', 'eco_org', 'house_property',
-                'individual','books','money','GPE','phone_num','correct_time','specific_loc','other_individuals','projects','contracts']
+ENTITY_TYPES = ['PER','LAW','CRIME','LOC','TIME','ORG','ROLE']
 
 
 class InputExample:
