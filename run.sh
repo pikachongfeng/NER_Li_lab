@@ -4,7 +4,7 @@ export MID_DATA_DIR="./mid_data"
 export RAW_DATA_DIR="./raw_data"
 export OUTPUT_DIR="./out"
 
-export GPU_IDS=""
+export GPU_IDS="-1"
 export BERT_TYPE="roberta_wwm"  # roberta_wwm / roberta_wwm_large / uer_large
 export BERT_DIR="./bert/torch_$BERT_TYPE"
 
