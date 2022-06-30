@@ -1,0 +1,9 @@
+{
+  "TIME": 1,
+  "CRIME": 2,
+  "PER": 3,
+  "LAW": 4,
+  "ROLE": 5,
+  "ORG": 6,
+  "LOC": 7
+}

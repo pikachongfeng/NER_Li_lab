@@ -4,7 +4,6 @@ from tqdm import trange
 import numpy as np
 from sklearn.model_selection import train_test_split, KFold
 
-filtration = ["诉求","事实描述","抱怨","格式语句","银行贷款还不上","政府越界_房","抵押问题","一般行为","物业管理问题","非法放贷","负面行为","开发商恶劣行为","逾期交房","房屋建设问题","对业主进行诈骗","ORG","TIME","开发商虚假承诺","其他信息","LOC","政府越界_金","INFO","政府渎职_房","政府渎职_金","银行问题服务","开发商涉黑","存款丢失","个人诈骗","非法集资"]
 with open(os.path.join('./', 'name_dict.json'), encoding='utf-8') as f:
     ent2id = json.load(f)
 
@@ -19,35 +18,46 @@ def convert_data_to_json(base_dir, save_data=False, save_dict=False):
 
     stack_dir = os.path.join(base_dir, 'train')
 
-    # process train examples
-    for i in trange(4877): ##trange会打印进度条
-        with open(os.path.join(stack_dir, f'xfj_{i:04d}.txt'), encoding='utf-8') as f:
-            text = f.read().strip()
+    f = open("../../source.txt","r") 
+    f2 = open("../../target.txt","r")
+    lines = f.readlines()
+    lines2 = f2.readlines()
+    i = 0
+    for line in lines:
+        text = line.replace(' ','').strip()
 
-        labels = []
-        with open(os.path.join(stack_dir, f'xfj_{i:04d}.ann'), encoding='utf-8') as f:
-            for line in f.readlines():
-                tmp_label = line.strip().split('\t')
-                if (tmp_label[0][0] == "E"):
-                    continue
-                assert len(tmp_label) == 3
-                tmp_mid = tmp_label[1].split() ##应该分成三段：实体类型，开始位置，结束位置
-                if (tmp_mid[0] in filtration):
-                    continue
-                tmp_mid[0] = ent2id[tmp_mid[0]]
-                tmp_label = [tmp_label[0]] + tmp_mid + [tmp_label[2]] ##长度为5
-
+        labels=[]
+        line2 = lines2[i].strip().split(" ")
+        lineList = line.strip().split(" ")
+        start = 0
+        j = 0
+        while j < len(line2):
+            label = line2[j]
+            id = "T" + str(j)
+            if label != 'O':
+                entity = label[2:]
+                word = lineList[j]
+                start_idx = start
+                j += 1                    
+                while (j < len(line2) and len(line2[j]) > 0 and line2[j][0] == 'I' and line2[j][2:] == entity):
+                    word += lineList[j]
+                    j += 1
+                end_idx = start + len(word)
+                tmp_label = [id] + [entity] + [start_idx] + [end_idx] + [word]
                 labels.append(tmp_label)
-                tmp_label[2] = int(tmp_label[2]) ##开始位置
-                tmp_label[3] = int(tmp_label[3]) ##结束位置
-
-                assert text[tmp_label[2]:tmp_label[3]] == tmp_label[-1], '{},{}索引抽取错误'.format(tmp_label, i)
-
+                start = end_idx
+            else:
+                start = len(lineList[j]) + start
+                j += 1
+                
         stack_examples.append({'id': i,
                                'text': text,
                                'labels': labels,
                                'pseudo': 0}) ##是否为test_set
+        i += 1
 
+    f.close()
+    f2.close()
 
     # 构建实体知识库
     kf = KFold(10)
@@ -75,7 +85,7 @@ def convert_data_to_json(base_dir, save_data=False, save_dict=False):
                     candidate_entities.append(_ent)
 
             _ex['candidate_entities'] = candidate_entities ##该测试集里面拥有的文本内容
-    assert len(ent_types) == 22 ##总共22种实体类型
+    assert len(ent_types) == 7,'{}'.format(ent_types) ##总共7种实体类型
 
     train, dev = train_test_split(stack_examples, shuffle=True, random_state=123, test_size=0.15)
 
@@ -102,28 +112,13 @@ def convert_data_to_json(base_dir, save_data=False, save_dict=False):
 def build_ent2query(data_dir):
     # 利用实体类型简介来描述 query
     ent2query = {
-        'ID_card': "数字号码",
-        'other_org': "不确定的组织",
-        'unit_org': "法院等组织",
-        'govern_org': "政府直属部门",
-        'other_loc': "不是具体位置的地址",
-        'bank_card': "数字号码",
-        'group': "大于1人",
-        'incorrect_time': "不准确时间",
-        'keys': "钥匙",
-        'other_things': "其他事物",
-        'eco_org': "商业机构",
-        'house_property': "房产证",
-        'individual': "个体",
-        'books':"书籍条例",
-        'money':"钱数",
-        'GPE':"GPE",
-        'phone_num':"电话号码",
-        'correct_time':"确切时间",
-        'specific_loc':"具体住址",
-        'other_individuals':"其他人",
-        'projects':"项目产品",
-        'contracts':"合同",
+        'TIME': "时间",
+        'ORG': "组织",
+        'ROLE': "职业",
+        'PER': "人物",
+        'LOC': "地点",
+        'CRIME': "罪犯",
+        'LAW': "法律",
     }
 
     with open(os.path.join(data_dir, 'mrc_ent2id.json'), 'w', encoding='utf-8') as f:
