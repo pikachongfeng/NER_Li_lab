@@ -333,9 +333,8 @@ def convert_crf_example(ex_idx, example: InputExample, tokenizer: BertTokenizer,
 
     #将文本分词后创建一个包含对应 id，token 类型及是否遮盖的词典
     encode_dict = tokenizer.encode_plus(text=tokens,
-                                        truncation=True,
                                         max_length=max_seq_len,
-                                        padding='max_length',
+                                        pad_to_max_length=True,
                                         is_pretokenized=True,
                                         return_token_type_ids=True,
                                         return_attention_mask=True)
@@ -416,9 +415,8 @@ def convert_span_example(ex_idx, example: InputExample, tokenizer: BertTokenizer
         assert len(end_ids) == max_seq_len
 
     encode_dict = tokenizer.encode_plus(text=tokens,
-                                        truncation=True,
                                         max_length=max_seq_len,
-                                        padding='max_length',
+                                        pad_to_max_length=True,
                                         is_pretokenized=True,
                                         return_token_type_ids=True,
                                         return_attention_mask=True)
@@ -512,8 +510,7 @@ def convert_mrc_example(ex_idx, example: InputExample, tokenizer: BertTokenizer,
             encode_dict = tokenizer.encode_plus(text=tokens_a, ##当前实体在mrc_ent2id中的那句话，分词后
                                                 text_pair=tokens_b, ##Optional second sequence to be encoded
                                                 max_length=max_seq_len,
-                                                truncation=True,
-                                                padding='max_length',
+                                                pad_to_max_length=True,
                                                 truncation_strategy='only_second',
                                                 is_pretokenized=True,
                                                 return_token_type_ids=True,
@@ -550,11 +547,10 @@ def convert_mrc_example(ex_idx, example: InputExample, tokenizer: BertTokenizer,
             text_a = ent2query[_type]
             tokens_a = fine_grade_tokenize(text_a, tokenizer)
 
-            encode_dict = tokenizer.encode_plus(text=tokens_a,
-                                                text_pair=tokens_b,
-                                                truncation=True,
+            encode_dict = tokenizer.encode_plus(text=tokens_a, ##当前实体在mrc_ent2id中的那句话，分词后
+                                                text_pair=tokens_b, ##Optional second sequence to be encoded
                                                 max_length=max_seq_len,
-                                                padding='max_length',
+                                                pad_to_max_length=True,
                                                 truncation_strategy='only_second',
                                                 is_pretokenized=True,
                                                 return_token_type_ids=True,
